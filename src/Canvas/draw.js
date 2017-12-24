@@ -8,9 +8,17 @@ export function createDrawer(context, timeout = 200) {
   let nextTime, lastTime = 0;
   let last;
 
-  return function draw(x, y) {
+  const canvas = context.canvas;
+
+  function toPos(coords) {
+    return {
+      x: coords.x * canvas.width,
+      y: coords.y * canvas.height,
+    };
+  }
+
+  function draw(pos) {
     nextTime = new Date().getTime();
-    const pos = {x, y};
 
     if (last && (nextTime - lastTime) > timeout) {
       console.log(len(last, pos));
@@ -31,4 +39,8 @@ export function createDrawer(context, timeout = 200) {
 
     lastTime = nextTime;
   }
+
+  return function drawCoords(coords) {
+    draw(toPos(coords));
+  };
 }

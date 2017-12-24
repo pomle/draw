@@ -12,7 +12,7 @@ class Canvas extends Component {
   }
 
   handleData(data) {
-    this.draw(data);
+    this.draw(data.state);
   }
 
   render() {
