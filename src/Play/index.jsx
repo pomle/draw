@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import {joinSession} from 'snex';
 
-import {createSensor, joinSession} from 'snex';
+import Draw from './Draw';
 
 class Play extends Component {
   constructor(props) {
@@ -16,19 +17,7 @@ class Play extends Component {
   async componentDidMount() {
     try {
         const conn = await joinSession(this.props.match.params.id);
-
-        const sensor = createSensor(this.surface);
-
-        sensor.listen(data => {
-            console.log("Sending", data);
-            conn.send(data);
-        });
-
-        conn.on('data', function(data) {
-            console.info('Remote Received', data);
-        });
-
-        this.setState({conn})
+        this.setState({conn});
     } catch (error) {
         console.log(error);
         this.setState({error});
@@ -45,11 +34,10 @@ class Play extends Component {
             {this.state.busy ? "Please wait" : "Done"}
         </div>
 
-        <object
-          data="/surface/draw.svg"
-          type="image/svg+xml"
-          ref={node => this.surface = node}>
-        </object>
+        { this.state.conn
+            ? <Draw conn={this.state.conn} />
+            : null
+        }
 
         <div className="error">
             {this.state.error && this.state.error.message}

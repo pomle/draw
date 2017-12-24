@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Map} from 'immutable';
 
-import {createSession} from 'snex';
+import {createPeer, createSession} from 'snex';
 
 import Player from './Player';
 
@@ -16,7 +16,8 @@ class Hub extends Component {
   }
 
   async componentDidMount() {
-    const session = await createSession();
+    const peer = createPeer('pontus');
+    const session = await createSession(peer);
     const url = `/play/${session.id}`;
     this.setState({url});
 

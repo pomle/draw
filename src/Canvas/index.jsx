@@ -12,7 +12,9 @@ class Canvas extends Component {
   }
 
   handleData(data) {
-    this.draw(data.state);
+    if (data.type === 'draw') {
+      this.draw(data.draw.state);
+    }
   }
 
   render() {
