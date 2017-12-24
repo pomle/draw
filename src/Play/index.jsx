@@ -17,6 +17,10 @@ class Play extends Component {
   async componentDidMount() {
     try {
         const conn = await joinSession(this.props.match.params.id);
+        conn.on('data', data => {
+          this.handleData(data);
+        });
+
         this.setState({conn});
     } catch (error) {
         console.log(error);
@@ -24,6 +28,10 @@ class Play extends Component {
     }
 
     this.setState({busy: false});
+  }
+
+  handleData(data) {
+    console.log('Player got data', data);
   }
 
   render() {

@@ -16,7 +16,7 @@ class Hub extends Component {
   }
 
   async componentDidMount() {
-    const peer = createPeer('pontus');
+    const peer = createPeer();
     const session = await createSession(peer);
     const url = `/play/${session.id}`;
     this.setState({url});
