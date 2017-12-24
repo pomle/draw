@@ -4,18 +4,18 @@ import {createSensor} from 'snex';
 
 class Draw extends Component {
   componentDidMount() {
-      this.surface.addEventListener('load', () => {
-        console.log('Ready');
-        this.sensor = createSensor(this.surface);
+    this.surface.addEventListener('load', () => {
+      console.log('Ready');
+      this.sensor = createSensor(this.surface);
 
-        this.sensor.listen(data => {
-            console.log("Sending", data);
-            this.props.conn.send({
-              type: 'draw',
-              draw: data,
-            });
+      this.sensor.listen(data => {
+        console.log("Sending", data);
+        this.props.conn.send({
+          type: 'draw',
+          draw: data,
         });
       });
+    });
   }
 
   componentWillUnmount() {
@@ -26,7 +26,7 @@ class Draw extends Component {
     return (
       <div className="Draw">
         <object
-          data="/surface/draw.svg"
+          data={process.env.PUBLIC_URL + "surface/draw.svg"}
           type="image/svg+xml"
           ref={node => this.surface = node}>
         </object>

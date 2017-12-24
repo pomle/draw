@@ -2,6 +2,7 @@
   "name": "pictionary",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://pomle.github.io/pictionary/",
   "dependencies": {
     "immutable": "^3.8.2",
     "react": "^16.2.0",
