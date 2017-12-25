@@ -26,7 +26,7 @@ class Draw extends Component {
     return (
       <div className="Draw">
         <object
-          data={"/surface/draw.svg"}
+          data={"/static/draw.svg"}
           type="image/svg+xml"
           ref={node => this.surface = node}>
         </object>
