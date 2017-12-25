@@ -10,7 +10,7 @@ body {
 body,
 input,
 button {
-  font-size: 3vw;
+  font-size: 2.5vw;
   text-align: center;
 }
 
@@ -28,7 +28,7 @@ a {
 }
 
 h2 {
-    font-size: 5vw;
+    font-size: 4vw;
 }
 
 button {

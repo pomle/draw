@@ -1,0 +1,25 @@
+.PlayerCount {
+    background: blue;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    font-size: 1vw;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 8vw;
+    right: 8vw;
+    transition: transform .5s ease-out;
+    height: 10vw;
+    width: 10vw;
+}
+
+.PlayerCount .number {
+    font-size: 6vw;
+}
+
+.PlayerCount .text {
+    position: relative;
+    top: -1vw;
+}

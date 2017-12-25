@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import JoinURL from './JoinURL';
 import Player from './Player';
+import PlayerCount from './PlayerCount';
 
 import './GreenRoom.css';
 
@@ -18,9 +19,7 @@ class GreenRoom extends Component {
           : null
         }
 
-        <div className="playerCount">
-            {players.size}
-        </div>
+        <PlayerCount players={players} />
 
         <ul className="players">
             { players.map(player => {
