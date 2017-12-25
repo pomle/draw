@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 
-import Canvas from '../../../Canvas';
-
 class Player extends Component {
   render() {
+    const {player} = this.props;
+
     return (
       <div className="Player">
-        <Canvas remote={this.props.player.remote} />
+        <div className="name">{player.name || 'Waiting'}</div>
+
+        <div className="score">
+            {player.score}
+        </div>
       </div>
     );
   }

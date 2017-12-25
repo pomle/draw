@@ -17,7 +17,7 @@ class GreenRoom extends Component {
         }
 
         <div className="playerCount">
-            {this.state.players.size}
+            {players.size}
         </div>
 
         <ul className="players">

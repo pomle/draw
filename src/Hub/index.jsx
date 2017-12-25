@@ -7,6 +7,7 @@ import GreenRoom from './GreenRoom';
 
 const Player = Record({
   score: 0,
+  name: null,
   remote: null,
 });
 
@@ -35,8 +36,25 @@ class Hub extends Component {
     this.setState({session});
   }
 
+  handleMessage(player, data) {
+    console.log(Player, data);
+
+    if (data.type === 'join') {
+      return this.updatePlayer(player.remote, player.set('name', data.name));
+    }
+  }
+
   addPlayer(remote) {
     const player = new Player({remote});
+
+    remote.on('data', data => {
+      this.handleMessage(player, data);
+    });
+
+    this.updatePlayer(remote, player);
+  }
+
+  updatePlayer(remote, player) {
     const players = this.state.players.set(remote, player);
     this.setState({players});
   }
