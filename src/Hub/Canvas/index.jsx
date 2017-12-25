@@ -4,9 +4,11 @@ import {createDrawer} from './draw.js';
 
 class Canvas extends Component {
   componentDidMount() {
+    const {player} = this.props;
+
     this.draw = createDrawer(this.canvas.getContext('2d'));
 
-    this.props.remote.on('data', data => {
+    player.remote.on('data', data => {
       this.handleData(data);
     });
   }
@@ -18,8 +20,11 @@ class Canvas extends Component {
   }
 
   render() {
+    const {player} = this.props;
     return (
       <div className="Canvas">
+        <div className="playingPlayer">{player.name}</div>
+
         <canvas width="800" height="600" ref={canvas => this.canvas = canvas}/>
       </div>
     );

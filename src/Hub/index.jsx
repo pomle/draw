@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
-import {Map, Record} from 'immutable';
+import {OrderedMap, Record} from 'immutable';
 
 import {createPeer, createSession} from 'snex';
 
+import Canvas from './Canvas';
 import GreenRoom from './GreenRoom';
+
+const WORDS = [
+  'cat',
+  'dog',
+  'giraffe',
+];
+
+async function getRandomWord() {
+  return WORDS[Math.random(WORDS.length) | 0];
+}
 
 const Player = Record({
   score: 0,
@@ -14,6 +25,7 @@ const Player = Record({
 
 const GameState = Record({
   playerDrawing: null,
+  word: null,
 });
 
 class Hub extends Component {
@@ -23,7 +35,7 @@ class Hub extends Component {
     this.state = {
         gameState: new GameState(),
         session: null,
-        players: new Map(),
+        players: new OrderedMap(),
     };
   }
 
@@ -46,8 +58,20 @@ class Hub extends Component {
     console.log(Player, data);
 
     if (data.type === 'join') {
-      return this.updatePlayer(player.remote,
-        player.set('name', data.name).set('ready', true));
+      const updatedPlayer = player
+        .set('name', data.name)
+        .set('ready', true);
+
+      this.updatePlayer(player.remote, updatedPlayer);
+
+      player.remote.send({
+        type: 'ready',
+      });
+
+      if (!this.state.players.some(player => !player.ready)) {
+        const player = this.getNextPlayer();
+        this.activateDrawer(player);
+      }
     }
   }
 
@@ -71,10 +95,41 @@ class Hub extends Component {
     this.setState({players});
   }
 
+  getNextPlayer() {
+    const playerList = this.state.players.toList();
+    const currentPlayer = this.state.gameState.playerDrawing;
+    const currentIndex = playerList.findIndex(player => player === currentPlayer);
+    const nextIndex = (currentIndex + 1) % playerList.size;
+    return playerList.get(nextIndex);
+  }
+
+  async activateDrawer(drawer) {
+    const word = await getRandomWord();
+
+    this.state.players.forEach(player => {
+      if (player !== drawer) {
+        player.remote.send({
+          type: 'guessing',
+        });
+      } else {
+        player.remote.send({
+          type: 'drawing',
+          word,
+        });
+      }
+    });
+
+    this.setState({
+      gameState: this.state.gameState
+        .set('playerDrawing', drawer)
+        .set('word', word)
+    });
+  }
+
   renderGameState() {
     const {gameState, session, players} = this.state;
     if (gameState.playerDrawing) {
-      return null;
+      return <Canvas player={gameState.playerDrawing}/>;
     } else {
       return <GreenRoom
         session={session}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Record} from 'immutable';
 import {joinSession} from 'snex';
 
 import Join from './Join';
@@ -6,9 +7,12 @@ import Guess from './Guess';
 import Draw from './Draw';
 import Wait from './Wait';
 
-export const STATE_JOIN = 'join';
-export const STATE_DRAW = 'draw';
-export const STATE_GUESS = 'guess';
+const PlayerState = Record({
+  conn: null,
+  ready: false,
+  drawing: false,
+  guessing: false,
+});
 
 class Play extends Component {
   constructor(props) {
@@ -16,8 +20,7 @@ class Play extends Component {
 
     this.state = {
         busy: true,
-        conn: null,
-        gameState: null,
+        playerState: new PlayerState(),
         error: null,
     };
   }
@@ -30,8 +33,7 @@ class Play extends Component {
         });
 
         this.setState({
-          gameState: STATE_JOIN,
-          conn
+          playerState: this.state.playerState.set('conn', conn),
         });
     } catch (error) {
         console.log(error);
@@ -42,25 +44,41 @@ class Play extends Component {
   }
 
   handleData(data) {
-    if (data.type === 'state-change') {
-      this.setState({gameState: data.state});
+    if (data.type === 'drawing') {
+      this.setState({
+        playerState: this.state.playerState.set('drawing', data.word)
+      });
     }
+
+    if (data.type === 'ready') {
+      this.setState({
+        playerState: this.state.playerState.set('ready', true)
+      });
+    }
+
     console.log('Player got data', data);
   }
 
   renderState() {
-    const {conn} = this.state;
+    const {busy, playerState} = this.state;
 
-    switch (this.state.gameState) {
-      case STATE_JOIN:
-        return <Join conn={conn}/>;
-      case STATE_GUESS:
-        return <Guess conn={conn}/>;
-      case STATE_DRAW:
-        return <Draw conn={conn}/>;
-      default:
-        return <Wait text="Please wait..."/>;
+    if (busy) {
+        return <Wait text="Connecting..."/>;
     }
+
+    if (!playerState.ready) {
+        return <Join conn={playerState.conn}/>;
+    }
+
+    if (playerState.drawing) {
+        return <Draw word={playerState.drawing} conn={playerState.conn}/>;
+    }
+
+    if (playerState.guessing) {
+        return <Guess conn={playerState.conn}/>;
+    }
+
+    return <Wait text="Please wait..."/>;
   }
 
   render() {

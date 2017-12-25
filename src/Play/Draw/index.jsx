@@ -25,8 +25,14 @@ class Draw extends Component {
   }
 
   render() {
+    const {word} = this.props;
+
     return (
       <div className="Draw">
+        <div className="subject">
+          Draw the word: {word}
+        </div>
+
         <object
           data={surface}
           type="image/svg+xml"
