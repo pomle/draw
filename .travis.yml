@@ -4,6 +4,7 @@ node_js:
 
 script:
 - yarn run build
+- echo "draw.pomle.com" > build/CNAME
 deploy:
   provider: pages
   skip_cleanup: true

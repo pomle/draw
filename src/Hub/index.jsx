@@ -16,7 +16,8 @@ class Hub extends Component {
   }
 
   async componentDidMount() {
-    const peer = createPeer();
+    console.log(this.props);
+    const peer = createPeer(this.props.match.params.id);
     const session = await createSession(peer);
     const url = `/play/${session.id}`;
     this.setState({url});

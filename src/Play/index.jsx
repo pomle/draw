@@ -11,7 +11,7 @@ class Play extends Component {
         busy: true,
         conn: null,
         error: null,
-    }
+    };
   }
 
   async componentDidMount() {

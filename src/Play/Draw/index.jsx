@@ -26,7 +26,7 @@ class Draw extends Component {
     return (
       <div className="Draw">
         <object
-          data={process.env.PUBLIC_URL + "surface/draw.svg"}
+          data={"/surface/draw.svg"}
           type="image/svg+xml"
           ref={node => this.surface = node}>
         </object>
