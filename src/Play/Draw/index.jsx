@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import {createSensor} from 'snex';
 
+import surface from './draw.svg';
+
 class Draw extends Component {
   componentDidMount() {
     this.surface.addEventListener('load', () => {
@@ -26,7 +28,7 @@ class Draw extends Component {
     return (
       <div className="Draw">
         <object
-          data={"/static/draw.svg"}
+          data={surface}
           type="image/svg+xml"
           ref={node => this.surface = node}>
         </object>
