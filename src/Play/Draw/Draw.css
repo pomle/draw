@@ -1,0 +1,31 @@
+.Draw {
+
+}
+
+.Draw .surface {
+    background: #fff;
+    display: flex;
+    justify-content: center;
+}
+
+.Draw .surface > * {
+    position: absolute;
+}
+
+.Draw .surface > .subject,
+.Draw .surface > canvas {
+    pointer-events: none;
+}
+
+.Draw .surface > canvas,
+.Draw .surface > .drawInterface {
+    height: 100%;
+    margin: auto;
+}
+
+.Draw .surface > .subject {
+    color: #000;
+    font-size: 5vw;
+    text-align: center;
+    width: 100%;
+}

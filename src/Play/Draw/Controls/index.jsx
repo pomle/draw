@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
+
 import {createSensor} from 'snex';
-import {createDrawer} from 'lib/draw.js';
+
+import Controls from './Controls';
 
 import surface from './draw.svg';
 
-import './Draw.css';
-
 class Draw extends Component {
   componentDidMount() {
-    this.draw = createDrawer(this.canvas.getContext('2d'));
-
     this.surface.addEventListener('load', () => {
-
+      console.log('Ready');
       this.sensor = createSensor(this.surface);
 
       this.sensor.listen(data => {
-        this.draw(data.state);
-
         console.log("Sending", data);
         this.props.conn.send({
           type: 'draw',
@@ -35,20 +31,17 @@ class Draw extends Component {
 
     return (
       <div className="Draw">
-        <div className="surface">
-          <object
-            className="drawInterface"
-            data={surface}
-            type="image/svg+xml"
-            ref={node => this.surface = node}>
-          </object>
-
-          <canvas width="800" height="450" ref={node => this.canvas = node}/>
-
-          <div className="subject">
-            Draw the word: {word}
-          </div>
+        <div className="subject">
+          Draw the word: {word}
         </div>
+
+        <object
+          data={surface}
+          type="image/svg+xml"
+          ref={node => this.surface = node}>
+        </object>
+
+        <Controls players={this.props.players} conn={this.props.conn}/>
       </div>
     );
   }

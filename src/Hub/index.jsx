@@ -55,8 +55,6 @@ class Hub extends Component {
   }
 
   handleMessage(player, data) {
-    console.log(Player, data);
-
     if (data.type === 'join') {
       const updatedPlayer = player
         .set('name', data.name)
