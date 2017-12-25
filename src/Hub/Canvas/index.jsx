@@ -5,8 +5,10 @@ import {createDrawer} from 'lib/draw.js';
 class Canvas extends Component {
   componentDidMount() {
     const context = this.canvas.getContext('2d');
+
     context.fillStyle = '#fff';
     context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    context.lineWidth = 3;
 
     this.draw = createDrawer(context);
 
@@ -31,7 +33,7 @@ class Canvas extends Component {
 
     return (
       <div className="Canvas">
-        <div className="playingPlayer">{player.name}</div>
+        <h2 className="playingPlayer">{player.name} is drawing</h2>
 
         <canvas width="800" height="450" ref={canvas => this.canvas = canvas}/>
       </div>

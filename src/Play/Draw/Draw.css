@@ -25,7 +25,5 @@
 
 .Draw .surface > .subject {
     color: #000;
-    font-size: 5vw;
-    text-align: center;
     width: 100%;
 }

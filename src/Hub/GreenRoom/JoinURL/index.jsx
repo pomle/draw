@@ -7,7 +7,12 @@ class JoinURL extends Component {
     const url = `/play/${session.id}`;
     return (
       <div className="JoinURL">
-        <a href={url}>{url}</a>
+        <div>
+            Join the game at:
+        </div>
+        <div>
+            <a href={url}>{url}</a>
+        </div>
       </div>
     );
   }

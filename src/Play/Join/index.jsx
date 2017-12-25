@@ -25,8 +25,15 @@ class Join extends Component {
   render() {
     return (
       <div className="Join">
-        <input type="text" value={this.state.name} onChange={this.handleNameChange}/>
-        <button onClick={this.sendJoin}>Join</button>
+        <h2>Pick a name</h2>
+
+        <div className="name">
+          <input type="text" value={this.state.name} onChange={this.handleNameChange}/>
+        </div>
+
+        <div className="confirm">
+          <button onClick={this.sendJoin}>Join</button>
+        </div>
       </div>
     );
   }

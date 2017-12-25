@@ -8,7 +8,10 @@ import './Draw.css';
 
 class Draw extends Component {
   componentDidMount() {
-    this.draw = createDrawer(this.canvas.getContext('2d'));
+    const context = this.canvas.getContext('2d');
+    context.lineWidth = 3;
+
+    this.draw = createDrawer(context);
 
     this.surface.addEventListener('load', () => {
 
@@ -45,9 +48,9 @@ class Draw extends Component {
 
           <canvas width="800" height="450" ref={node => this.canvas = node}/>
 
-          <div className="subject">
+          <h2 className="subject">
             Draw the word: {word}
-          </div>
+          </h2>
         </div>
       </div>
     );

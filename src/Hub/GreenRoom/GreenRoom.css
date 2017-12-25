@@ -1,3 +1,17 @@
 .GreenRoom {
-    text-align: center;
+
+}
+
+.GreenRoom .players {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+}
+
+.GreenRoom .players .Player {
+
+    background: red;
+    color: #fff;
+    margin: 1em;
+    padding: 2em;
 }

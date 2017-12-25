@@ -11,6 +11,8 @@ class GreenRoom extends Component {
 
     return (
       <div className="GreenRoom">
+        <h2>Drawsy GreenRoom</h2>
+
         { session
           ? <JoinURL session={session}/>
           : null
