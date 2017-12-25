@@ -4,6 +4,7 @@ import {joinSession} from 'snex';
 import Join from './Join';
 import Guess from './Guess';
 import Draw from './Draw';
+import Wait from './Wait';
 
 export const STATE_JOIN = 'join';
 export const STATE_DRAW = 'draw';
@@ -16,7 +17,7 @@ class Play extends Component {
     this.state = {
         busy: true,
         conn: null,
-        gameState: STATE_JOIN,
+        gameState: null,
         error: null,
     };
   }
@@ -28,7 +29,10 @@ class Play extends Component {
           this.handleData(data);
         });
 
-        this.setState({conn});
+        this.setState({
+          gameState: STATE_JOIN,
+          conn
+        });
     } catch (error) {
         console.log(error);
         this.setState({error});
@@ -55,17 +59,13 @@ class Play extends Component {
       case STATE_DRAW:
         return <Draw conn={conn}/>;
       default:
-        return null;
+        return <Wait text="Please wait..."/>;
     }
   }
 
   render() {
     return (
       <div className="Play">
-        <div className="busy">
-            {this.state.busy ? "Please wait" : "Done"}
-        </div>
-
         { this.renderState() }
 
         <div className="error">

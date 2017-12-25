@@ -6,7 +6,9 @@ class Player extends Component {
 
     return (
       <div className="Player">
-        <div className="name">{player.name || 'Waiting'}</div>
+
+        <div className="state">{player.ready ? 'Ready' : 'Waiting'}</div>
+        <div className="name">{player.name}</div>
 
         <div className="score">
             {player.score}

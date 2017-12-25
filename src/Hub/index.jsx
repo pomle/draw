@@ -7,8 +7,13 @@ import GreenRoom from './GreenRoom';
 
 const Player = Record({
   score: 0,
+  ready: false,
   name: null,
   remote: null,
+});
+
+const GameState = Record({
+  playerDrawing: null,
 });
 
 class Hub extends Component {
@@ -16,6 +21,7 @@ class Hub extends Component {
     super(props);
 
     this.state = {
+        gameState: new GameState(),
         session: null,
         players: new Map(),
     };
@@ -40,7 +46,8 @@ class Hub extends Component {
     console.log(Player, data);
 
     if (data.type === 'join') {
-      return this.updatePlayer(player.remote, player.set('name', data.name));
+      return this.updatePlayer(player.remote,
+        player.set('name', data.name).set('ready', true));
     }
   }
 
@@ -64,13 +71,22 @@ class Hub extends Component {
     this.setState({players});
   }
 
+  renderGameState() {
+    const {gameState, session, players} = this.state;
+    if (gameState.playerDrawing) {
+      return null;
+    } else {
+      return <GreenRoom
+        session={session}
+        players={players.toList()}
+      />;
+    }
+  }
+
   render() {
     return (
       <div className="Hub">
-        <GreenRoom
-          session={this.state.session}
-          players={this.state.players.toList()}
-        />
+        { this.renderGameState() }
       </div>
     );
   }
