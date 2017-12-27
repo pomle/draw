@@ -3,7 +3,7 @@ import {Record} from 'immutable';
 import {joinSession} from 'snex';
 
 import Join from './Join';
-import Guess from './Guess';
+import Assess from './Assess';
 import Draw from './Draw';
 import Wait from './Wait';
 
@@ -11,7 +11,7 @@ const PlayerState = Record({
   conn: null,
   ready: false,
   drawing: false,
-  guessing: false,
+  asessing: false,
 });
 
 class Play extends Component {
@@ -50,6 +50,12 @@ class Play extends Component {
       });
     }
 
+    if (data.type === 'assess') {
+      this.setState({
+        playerState: this.state.playerState.set('assess', data.word)
+      });
+    }
+
     if (data.type === 'ready') {
       this.setState({
         playerState: this.state.playerState.set('ready', true)
@@ -78,8 +84,8 @@ class Play extends Component {
         return <Draw word={playerState.drawing} conn={playerState.conn}/>;
     }
 
-    if (playerState.guessing) {
-        return <Guess conn={playerState.conn}/>;
+    if (playerState.asessing) {
+        return <Assess answer={playerState.answer} conn={playerState.conn}/>;
     }
 
     return <Wait text="Please wait..."/>;

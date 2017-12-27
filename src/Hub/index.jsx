@@ -124,6 +124,20 @@ class Hub extends Component {
     });
   }
 
+  handleCorrectGuess(winner) {
+    this.state.players.forEach(player => {
+      if (player === winner) {
+
+      } else {
+        player.remote.send({
+          type: 'drawing',
+          word: this.state.gameState.word,
+        });
+      }
+    });
+  }
+
+
   renderGameState() {
     const {gameState, session, players} = this.state;
     if (gameState.playerDrawing) {
