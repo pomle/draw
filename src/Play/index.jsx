@@ -60,10 +60,14 @@ class Play extends Component {
   }
 
   renderState() {
-    const {busy, playerState} = this.state;
+    const {busy, error, playerState} = this.state;
 
     if (busy) {
         return <Wait text="Connecting..."/>;
+    }
+
+    if (error) {
+        return <Wait text={error.message}/>;
     }
 
     if (!playerState.ready) {
@@ -85,10 +89,6 @@ class Play extends Component {
     return (
       <div className="Play">
         { this.renderState() }
-
-        <div className="error">
-            {this.state.error && this.state.error.message}
-        </div>
       </div>
     );
   }
