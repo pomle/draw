@@ -1,5 +1,8 @@
 .GreenRoom {
-
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    height: 100vh;
 }
 
 .GreenRoom .players {
@@ -9,8 +12,13 @@
 }
 
 .GreenRoom .players .Player {
-
-    background: red;
+    background: #00b8ff;
+    background: radial-gradient(
+        #00b8ff 0,
+        #2255ff 100%
+    );
+    border-radius: 10%;
+    box-shadow: 0 .3em 2em -.5em #000;
     color: #fff;
     margin: 1em;
     padding: 2em;

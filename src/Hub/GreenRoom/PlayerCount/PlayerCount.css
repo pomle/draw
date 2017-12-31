@@ -1,6 +1,10 @@
 .PlayerCount {
-    background: blue;
+    background: radial-gradient(
+        #00b8ff 0,
+        #2255ff 100%
+    );
     border-radius: 50%;
+    box-shadow: 0 1em 2em -1em #000;
     color: #fff;
     display: flex;
     flex-direction: column;
