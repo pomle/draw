@@ -1,3 +1,7 @@
+html, body, #root, .App {
+  height: 100%;
+}
+
 body {
   background: repeating-linear-gradient(
     45deg,
