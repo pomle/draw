@@ -24,10 +24,14 @@ class Join extends Component {
       return <Play sessionId={sessionId}/>;
     }
 
-    return <StringDialog
-      caption="Session name"
-      confirm={this.setSession}
-    />;
+    return <div>
+      <StringDialog
+        caption="Session name"
+        confirm={this.setSession}
+      />
+
+      <button onClick={this.props.cancel}>Back</button>
+    </div>;
   }
 }
 

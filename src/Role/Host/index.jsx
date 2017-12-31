@@ -24,17 +24,31 @@ class Host extends Component {
     };
   }
 
+  restart = () => {
+    this.setState({
+      sessionId: null,
+    });
+  }
+
   render() {
     const {sessionId} = this.state;
     if (sessionId) {
-      return <Hub sessionId={sessionId}/>;
+      return <div>
+        <Hub sessionId={sessionId} />
+
+        <button onClick={this.restart}>Restart</button>
+      </div>;
     }
 
-    return <StringDialog
-      caption="Session name"
-      default={this.randomId}
-      confirm={(sessionId) => this.setState({sessionId})}
-    />;
+    return <div>
+      <StringDialog
+        caption="Session name"
+        default={this.randomId}
+        confirm={(sessionId) => this.setState({sessionId})}
+      />
+
+      <button onClick={this.props.cancel}>Back</button>
+    </div>;
   }
 }
 

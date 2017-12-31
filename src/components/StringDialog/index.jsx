@@ -29,7 +29,7 @@ class StringDialog extends Component {
         </div>
 
         <div className="confirm">
-          <button onClick={this.confirm}>{this.props.buttonText || 'Go'}</button>
+          <button onClick={this.confirm} disabled={this.state.value.length === 0}>{this.props.buttonText || 'Go'}</button>
         </div>
       </div>
     );

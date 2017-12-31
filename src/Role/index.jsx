@@ -15,12 +15,18 @@ class Role extends Component {
     };
   }
 
+  restore = () => {
+    this.setState({
+      role: null,
+    });
+  }
+
   render() {
     const {role} = this.state;
     if (role === ROLE_HOST) {
-      return <Host/>;
+      return <Host cancel={this.restore} />;
     } else if (role === ROLE_JOIN) {
-      return <Join/>;
+      return <Join cancel={this.restore} />;
     }
 
     return (
