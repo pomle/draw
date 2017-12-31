@@ -12,6 +12,12 @@ class Join extends Component {
     };
   }
 
+  unset = () => {
+    this.setState({
+      sessionId: null,
+    });
+  }
+
   setSession = (sessionId) => {
     this.setState({
       sessionId: sessionId.toUpperCase(),
@@ -21,7 +27,7 @@ class Join extends Component {
   render() {
     const {sessionId} = this.state;
     if (sessionId) {
-      return <Play sessionId={sessionId}/>;
+      return <Play sessionId={sessionId} cancel={this.unset}/>;
     }
 
     return <div>

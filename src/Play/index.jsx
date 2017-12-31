@@ -75,7 +75,11 @@ class Play extends Component {
     }
 
     if (error) {
-        return <Wait text={error.message}/>;
+        return <div>
+          <Wait text={error.message}/>
+
+          <button onClick={this.props.cancel}>Retry</button>
+        </div>;
     }
 
     if (playerState.drawing) {
