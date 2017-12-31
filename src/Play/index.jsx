@@ -21,13 +21,13 @@ class Play extends Component {
     super(props);
 
     this.state = {
-        busy: false,
-        playerState: new PlayerState({assessing: 'camel', ready: true}),
+        busy: true,
+        playerState: new PlayerState(),
         error: null,
     };
   }
 
-  async componentDidMount_() {
+  async componentDidMount() {
     try {
         const conn = await joinSession(this.props.match.params.id);
         conn.on('data', data => {
