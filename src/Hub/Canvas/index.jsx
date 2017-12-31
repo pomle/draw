@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import {createDrawer} from 'lib/draw.js';
 
+import './Canvas.css';
+
 class Canvas extends Component {
   componentDidMount() {
     const context = this.canvas.getContext('2d');

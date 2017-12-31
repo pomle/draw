@@ -1,12 +1,10 @@
-.Play {
+.Play .Wait,
+.Play .Join {
     display: flex;
-    align-items: center;
-    justify-content: center;
+        align-items: center;
+        flex-flow: column;
+        justify-content: center;
     height: 100vh;
-}
-
-.Play .Assess {
-
 }
 
 .Play .Assess .word {

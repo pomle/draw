@@ -13,8 +13,6 @@ class PlayerCount extends Component {
         ].join(' '),
     };
 
-    console.log(style);
-
     return (
         <div className="PlayerCount" style={style}>
           <div className="number">

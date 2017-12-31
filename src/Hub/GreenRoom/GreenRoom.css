@@ -20,6 +20,12 @@
     border-radius: 10%;
     box-shadow: 0 .3em 2em -.5em #000;
     color: #fff;
+    display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
     margin: 1em;
     padding: 2em;
+    height: 5em;
+    width: 5em;
 }

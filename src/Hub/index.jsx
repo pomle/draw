@@ -110,6 +110,7 @@ class Hub extends Component {
       if (player === winner) {
 
       } else {
+        console.log('Sending word', this.state);
         player.remote.send({
           type: 'drawing',
           word: this.state.gameState.word,
