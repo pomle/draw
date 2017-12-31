@@ -1,9 +1,10 @@
 .Play {
-    display: flex;
+
 }
 
 .Play .Draw {
     height: 100%;
+    width: 100%;
 }
 
 .Play .Wait,

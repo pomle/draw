@@ -78,16 +78,16 @@ class Play extends Component {
         return <Wait text={error.message}/>;
     }
 
-    if (!playerState.ready) {
-        return <Join conn={playerState.conn}/>;
-    }
-
     if (playerState.drawing) {
         return <Draw word={playerState.drawing} conn={playerState.conn}/>;
     }
 
     if (playerState.assessing) {
         return <Assess answer={playerState.assessing} conn={playerState.conn}/>;
+    }
+
+    if (!playerState.ready) {
+        return <Join conn={playerState.conn}/>;
     }
 
     return <Wait text="Please wait..."/>;

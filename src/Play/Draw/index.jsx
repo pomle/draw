@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {createSensor} from 'snex';
 import {createDrawer} from 'lib/draw.js';
 
+import Fill from './Fill';
 import surface from './draw.svg';
 
 import './Draw.css';
@@ -14,8 +15,15 @@ class Draw extends Component {
     this.draw = createDrawer(context);
 
     this.surface.addEventListener('load', () => {
+      console.log(this.surface.contentDocument);
+      this.surface.contentDocument.addEventListener('touchstart', event => {
+        console.log('AA');
+        event.preventDefault();
+      });
 
       this.sensor = createSensor(this.surface);
+
+      console.log(this.sensor);
 
       this.sensor.listen(data => {
         this.draw(data.state);
@@ -38,9 +46,8 @@ class Draw extends Component {
 
     return (
       <div className="Draw">
-        <div className="surface">
+        <Fill aspect={800/450}>
           <object
-            className="drawInterface"
             data={surface}
             type="image/svg+xml"
             ref={node => this.surface = node}>
@@ -48,10 +55,8 @@ class Draw extends Component {
 
           <canvas width="800" height="450" ref={node => this.canvas = node}/>
 
-          <h2 className="subject">
-            Draw the word: {word}
-          </h2>
-        </div>
+          <h2 className="subjectCaption">Draw: {word}</h2>
+        </Fill>
       </div>
     );
   }

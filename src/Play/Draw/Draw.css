@@ -2,28 +2,15 @@
 
 }
 
-.Draw .surface {
-    background: #fff;
-    display: flex;
-    justify-content: center;
-}
-
-.Draw .surface > * {
-    position: absolute;
-}
-
-.Draw .surface > .subject,
-.Draw .surface > canvas {
-    pointer-events: none;
-}
-
-.Draw .surface > canvas,
-.Draw .surface > .drawInterface {
-    height: 100%;
-    margin: auto;
-}
-
-.Draw .surface > .subject {
+.Draw .subjectCaption {
     color: #000;
-    width: 100%;
+}
+
+.Draw object {
+    touch-action: none;
+}
+
+.Draw .subjectCaption,
+.Draw canvas {
+    pointer-events: none;
 }

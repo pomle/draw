@@ -101,7 +101,6 @@ class Hub extends Component {
 
   async activateDrawer(drawer) {
     const word = await getRandomWord();
-
     this.state.players.forEach(player => {
       if (player !== drawer) {
         player.remote.send({
@@ -113,6 +112,8 @@ class Hub extends Component {
           word,
         });
       }
+
+      console.log('Sending to', player);
     });
 
     this.setState({
