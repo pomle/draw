@@ -10,7 +10,7 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename="/pictionary" >
         <div className="App">
             <Route path="/play/:id" component={Play}/>
             <Route exact path="/:id?" component={Hub}/>
