@@ -1,24 +1,13 @@
 import React, { Component } from 'react';
-import {OrderedMap, Record} from 'immutable';
+import {OrderedMap} from 'immutable';
 
 import {createPeer, createSession} from 'snex';
 
 import Canvas from './Canvas';
 import GreenRoom from './GreenRoom';
 
+import {Player, GameState} from './state.js';
 import {getRandomWord} from './word.js';
-
-const Player = Record({
-  score: 0,
-  ready: false,
-  name: null,
-  remote: null,
-});
-
-const GameState = Record({
-  playerDrawing: null,
-  word: null,
-});
 
 class Hub extends Component {
   constructor(props) {
