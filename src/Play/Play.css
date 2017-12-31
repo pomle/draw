@@ -1,18 +1,12 @@
-.Play .Wait,
-.Play .Join {
+.Play {
     display: flex;
-        align-items: center;
-        flex-flow: column;
-        justify-content: center;
-    height: 100vh;
 }
 
-.Play .Assess .word {
-    background: orange;
-    color: #fff;
-    display: flex;
-        align-items: center;
-        justify-content: center;
-    height: 80vh;
-    width: 80vh;
+.Play .Draw {
+    height: 100%;
+}
+
+.Play .Wait,
+.Play .Join {
+    margin: auto;
 }

@@ -19,7 +19,7 @@
 
 .Draw .surface > canvas,
 .Draw .surface > .drawInterface {
-    height: 100vh;
+    height: 100%;
     margin: auto;
 }
 

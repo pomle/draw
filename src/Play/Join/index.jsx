@@ -28,7 +28,7 @@ class Join extends Component {
         <h2>Pick a name</h2>
 
         <div className="name">
-          <input type="text" value={this.state.name} onChange={this.handleNameChange}/>
+          <input type="text" autoFocus size="16" value={this.state.name} onChange={this.handleNameChange}/>
         </div>
 
         <div className="confirm">

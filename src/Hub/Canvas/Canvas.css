@@ -1,13 +1,18 @@
 .Hub .Canvas {
     display: flex;
-    flex-flow: column;
-
+        flex-flow: column;
+        justify-content: space-around;
+    height: 100vh;
 }
 
 .Hub .Canvas .playingPlayer {
 }
 
+.Hub .Canvas .drawingArea {
+    flex: 1 1 auto;
+}
+
 .Hub .Canvas canvas {
     box-shadow: 0 1em 2em -1em #000;
-    height: 70vh;
+    object-fit: fill;
 }
