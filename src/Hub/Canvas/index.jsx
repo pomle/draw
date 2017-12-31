@@ -35,9 +35,13 @@ class Canvas extends Component {
 
     return (
       <div className="Canvas">
-        <h2 className="playingPlayer">{player.name} is drawing</h2>
+        <div>
+          <h2 className="playingPlayer">{player.name} is drawing</h2>
+        </div>
 
-        <canvas width="800" height="450" ref={canvas => this.canvas = canvas}/>
+        <div className="drawingArea">
+          <canvas width="800" height="450" ref={canvas => this.canvas = canvas}/>
+        </div>
       </div>
     );
   }
