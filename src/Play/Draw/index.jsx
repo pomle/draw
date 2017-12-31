@@ -15,15 +15,7 @@ class Draw extends Component {
     this.draw = createDrawer(context);
 
     this.surface.addEventListener('load', () => {
-      console.log(this.surface.contentDocument);
-      this.surface.contentDocument.addEventListener('touchstart', event => {
-        console.log('AA');
-        event.preventDefault();
-      });
-
       this.sensor = createSensor(this.surface);
-
-      console.log(this.sensor);
 
       this.sensor.listen(data => {
         this.draw(data.state);
