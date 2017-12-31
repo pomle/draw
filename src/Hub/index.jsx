@@ -9,6 +9,24 @@ import GreenRoom from './GreenRoom';
 import {Player, GameState} from './state.js';
 import {getRandomWord} from './word.js';
 
+async function startSession(sessionId) {
+  if (!sessionId) {
+    const peer = createPeer();
+    return createSession(peer);
+  }
+
+  for (let count = 0;; count++) {
+    try {
+      const sessionAttempt = sessionId + (count > 0 ? count : '');
+      console.log('Trying session', sessionAttempt);
+      const peer = createPeer(sessionAttempt);
+      return await createSession(peer);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+}
+
 class Hub extends Component {
   constructor(props) {
     super(props);
@@ -21,20 +39,7 @@ class Hub extends Component {
   }
 
   async componentDidMount() {
-    const sessionId = this.props.match.params.id;
-    let count = 0;
-    let session;
-    while (!session) {
-      try {
-        const sessionAttempt = sessionId + (count > 0 ? count : '');
-        console.log('Trying session', sessionAttempt);
-        const peer = createPeer(sessionAttempt);
-        session = await createSession(peer);
-      } catch (e) {
-        count++;
-        console.log(e);
-      }
-    }
+    const session = await startSession(this.props.match.params.id);
 
     session.on('connection', remote => {
         this.addPlayer(remote);
