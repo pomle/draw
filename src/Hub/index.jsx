@@ -21,8 +21,20 @@ class Hub extends Component {
   }
 
   async componentDidMount() {
-    const peer = createPeer(this.props.match.params.id);
-    const session = await createSession(peer);
+    const sessionId = this.props.match.params.id;
+    let count = 0;
+    let session;
+    while (!session) {
+      try {
+        const sessionAttempt = sessionId + (count > 0 ? count : '');
+        console.log('Trying session', sessionAttempt);
+        const peer = createPeer(sessionAttempt);
+        session = await createSession(peer);
+      } catch (e) {
+        count++;
+        console.log(e);
+      }
+    }
 
     session.on('connection', remote => {
         this.addPlayer(remote);
