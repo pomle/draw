@@ -7,11 +7,13 @@ import Assess from './Assess';
 import Draw from './Draw';
 import Wait from './Wait';
 
+import './Play.css';
+
 const PlayerState = Record({
   conn: null,
   ready: false,
-  drawing: false,
-  asessing: false,
+  drawing: null,
+  assessing: null,
 });
 
 class Play extends Component {
@@ -19,13 +21,13 @@ class Play extends Component {
     super(props);
 
     this.state = {
-        busy: true,
-        playerState: new PlayerState(),
+        busy: false,
+        playerState: new PlayerState({assessing: 'camel', ready: true}),
         error: null,
     };
   }
 
-  async componentDidMount() {
+  async componentDidMount_() {
     try {
         const conn = await joinSession(this.props.match.params.id);
         conn.on('data', data => {
@@ -84,8 +86,8 @@ class Play extends Component {
         return <Draw word={playerState.drawing} conn={playerState.conn}/>;
     }
 
-    if (playerState.asessing) {
-        return <Assess answer={playerState.answer} conn={playerState.conn}/>;
+    if (playerState.assessing) {
+        return <Assess answer={playerState.assessing} conn={playerState.conn}/>;
     }
 
     return <Wait text="Please wait..."/>;

@@ -5,8 +5,8 @@ class Assess extends Component {
     return (
       <div className="Assess">
 
-        <div className="answer">
-          {this.prop.answer}
+        <div className="word">
+          {this.props.answer}
         </div>
       </div>
     );

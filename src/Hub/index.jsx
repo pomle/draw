@@ -37,6 +37,7 @@ class Hub extends Component {
         session: null,
         players: new OrderedMap(),
     };
+
   }
 
   async componentDidMount() {
