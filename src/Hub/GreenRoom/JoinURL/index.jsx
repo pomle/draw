@@ -4,7 +4,7 @@ class JoinURL extends Component {
   render() {
     const {session} = this.props;
 
-    const url = `/play/${session.id}`;
+    const url = `#/${session.id}`;
     return (
       <div className="JoinURL">
         <div>
