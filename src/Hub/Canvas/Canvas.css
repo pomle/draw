@@ -9,4 +9,5 @@
 
 .Hub .Canvas canvas {
     box-shadow: 0 1em 2em -1em #000;
+    height: 70vh;
 }
