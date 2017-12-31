@@ -22,7 +22,7 @@ export function createDrawer(context, timeout = 200) {
 
     if (last && (nextTime - lastTime) > timeout) {
       console.log(len(last, pos));
-      if (len(last, pos) > 5) {
+      if (len(last, pos) > 1) {
         last = pos;
       }
     }

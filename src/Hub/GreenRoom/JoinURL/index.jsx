@@ -4,14 +4,10 @@ class JoinURL extends Component {
   render() {
     const {session} = this.props;
 
-    const url = `#/${session.id}`;
     return (
       <div className="JoinURL">
         <div>
-            Join the game at:
-        </div>
-        <div>
-            <a href={url}>{url}</a>
+            Join the game at {session.id}
         </div>
       </div>
     );

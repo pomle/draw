@@ -29,7 +29,7 @@ class Play extends Component {
 
   async componentDidMount() {
     try {
-        const conn = await joinSession(this.props.match.params.id);
+        const conn = await joinSession(this.props.sessionId);
         conn.on('data', data => {
           this.handleData(data);
         });

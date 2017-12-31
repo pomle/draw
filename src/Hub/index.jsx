@@ -39,7 +39,7 @@ class Hub extends Component {
   }
 
   async componentDidMount() {
-    const session = await startSession(this.props.match.params.id);
+    const session = await startSession(this.props.sessionId);
 
     session.on('connection', remote => {
         this.addPlayer(remote);
