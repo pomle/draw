@@ -6,15 +6,7 @@ import {createPeer, createSession} from 'snex';
 import Canvas from './Canvas';
 import GreenRoom from './GreenRoom';
 
-const WORDS = [
-  'cat',
-  'dog',
-  'giraffe',
-];
-
-async function getRandomWord() {
-  return WORDS[Math.random(WORDS.length) | 0];
-}
+import {getRandomWord} from './word.js';
 
 const Player = Record({
   score: 0,
