@@ -1,21 +1,21 @@
-.Draw {
+.Surface {
 
 }
 
-.Draw .subjectCaption {
+.Surface .subjectCaption {
     color: #000;
 }
 
-.Draw object {
+.Surface object {
     touch-action: none;
 }
 
-.Draw .subjectCaption,
-.Draw canvas {
+.Surface .subjectCaption,
+.Surface canvas {
     pointer-events: none;
 }
 
-.Draw .controls {
+.Surface .controls {
     display: flex;
     justify-content: space-around;
     position: absolute;
