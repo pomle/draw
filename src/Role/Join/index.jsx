@@ -32,7 +32,7 @@ class Join extends Component {
 
     return <div>
       <StringDialog
-        caption="Session name"
+        caption="Join Session"
         confirm={this.setSession}
       />
 

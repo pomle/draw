@@ -42,7 +42,7 @@ class Host extends Component {
 
     return <div>
       <StringDialog
-        caption="Session name"
+        caption="Create Session"
         default={this.randomId}
         confirm={(sessionId) => this.setState({sessionId})}
       />
