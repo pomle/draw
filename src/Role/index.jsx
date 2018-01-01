@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Push from 'components/Push';
+
 import Host from './Host';
 import Join from './Join';
 
@@ -23,20 +25,21 @@ class Role extends Component {
 
   render() {
     const {role} = this.state;
+
     if (role === ROLE_HOST) {
-      return <Host cancel={this.restore} />;
+      this.next = <Host cancel={this.restore} />;
     } else if (role === ROLE_JOIN) {
-      return <Join cancel={this.restore} />;
+      this.next = <Join cancel={this.restore} />;
     }
 
-    return (
-      <div>
-        <h2>Draw!</h2>
+    const first = <div>
+      <h2>Draw!</h2>
 
-        <button onClick={() => this.setState({role: ROLE_HOST})}>Host</button>
-        <button onClick={() => this.setState({role: ROLE_JOIN})}>Join</button>
-      </div>
-    );
+      <button onClick={() => this.setState({role: ROLE_HOST})}>Host</button>
+      <button onClick={() => this.setState({role: ROLE_JOIN})}>Join</button>
+    </div>;
+
+    return <Push left={first} right={this.next} next={!!role}/>;
   }
 }
 

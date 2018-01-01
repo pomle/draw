@@ -1,0 +1,9 @@
+.Push {
+    position: absolute;
+}
+
+.Push > * {
+    position: absolute;
+    transition: transform 2s ease;
+    width: 100vw;
+}
