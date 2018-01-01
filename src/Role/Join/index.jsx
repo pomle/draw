@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Push from 'components/Push';
 import StringDialog from 'components/StringDialog';
 import Play from '../../Play';
 
@@ -27,10 +28,10 @@ class Join extends Component {
   render() {
     const {sessionId} = this.state;
     if (sessionId) {
-      return <Play sessionId={sessionId} cancel={this.unset}/>;
+      this.next = <Play sessionId={sessionId} cancel={this.unset}/>;
     }
 
-    return <div>
+    const first = <div>
       <StringDialog
         caption="Join Session"
         confirm={this.setSession}
@@ -38,6 +39,8 @@ class Join extends Component {
 
       <button onClick={this.props.cancel}>Back</button>
     </div>;
+
+    return <Push left={first} right={this.next} next={sessionId}/>;
   }
 }
 

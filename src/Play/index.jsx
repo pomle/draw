@@ -21,15 +21,27 @@ class Play extends Component {
     super(props);
 
     this.state = {
-        busy: true,
-        playerState: new PlayerState(),
-        error: null,
+      busy: true,
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+      this.handleProps(this.props);
+  }
+
+  componentWillReceiveProps(props) {
+      this.handleProps(props);
+  }
+
+  async handleProps(props) {
+    this.setState({
+        busy: true,
+        playerState: new PlayerState(),
+        error: null,
+    });
+
     try {
-        const conn = await joinSession(this.props.sessionId);
+        const conn = await joinSession(props.sessionId);
         conn.on('data', data => {
           this.handleData(data);
         });
