@@ -14,3 +14,12 @@
 .Draw canvas {
     pointer-events: none;
 }
+
+.Draw .controls {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+        bottom: 0;
+        width: 100%;
+    z-index: 1;
+}
