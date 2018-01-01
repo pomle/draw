@@ -23,6 +23,7 @@ input,
 button {
   font-family: "Lemon", sans-serif;
   font-size: 22px;
+  outline: none;
   text-align: center;
 }
 
