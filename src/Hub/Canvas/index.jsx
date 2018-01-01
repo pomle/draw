@@ -7,9 +7,6 @@ import './Canvas.css';
 class Canvas extends Component {
   componentDidMount() {
     const context = this.canvas.getContext('2d');
-
-    context.fillStyle = '#fff';
-    context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     context.lineWidth = 3;
 
     this.draw = createDrawer(context);
