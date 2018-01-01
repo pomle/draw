@@ -45,6 +45,7 @@ class Host extends Component {
         caption="Create Session"
         default={this.randomId}
         confirm={(sessionId) => this.setState({sessionId})}
+        buttonText="Create"
       />
 
       <button onClick={this.props.cancel}>Back</button>

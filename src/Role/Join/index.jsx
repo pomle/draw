@@ -34,6 +34,7 @@ class Join extends Component {
       <StringDialog
         caption="Join Session"
         confirm={this.setSession}
+        buttonText="Join"
       />
 
       <button onClick={this.props.cancel}>Back</button>
