@@ -2,6 +2,7 @@ import {Record} from 'immutable';
 
 export const GameState = Record({
   playerDrawing: null,
+  scoreRate: null,
   word: null,
 });
 

@@ -5,6 +5,15 @@ import {createDrawer} from 'lib/draw.js';
 import './Canvas.css';
 
 class Canvas extends Component {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.active && !this.props.active) {
+      const context = this.canvas.getContext('2d');
+      context.clearRect(0, 0,
+        this.canvas.width,
+        this.canvas.height);
+    }
+  }
+
   componentDidMount() {
     const context = this.canvas.getContext('2d');
     context.lineWidth = 3;
@@ -12,8 +21,6 @@ class Canvas extends Component {
     this.draw = createDrawer(context);
 
     this.props.player.remote.on('data', this.handleData);
-
-    this.drawHistory = [];
   }
 
   componentWillUnmount() {
@@ -22,13 +29,13 @@ class Canvas extends Component {
 
   handleData = (data) => {
     if (data.type === 'draw') {
-      this.drawHistory.push(data.draw);
       this.draw(data.draw);
     }
   }
 
   render() {
     const {player} = this.props;
+    console.log('Player', player);
 
     return (
       <div className="Canvas">

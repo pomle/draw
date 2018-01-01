@@ -16,6 +16,12 @@ class StringDialog extends Component {
   }
 
   confirm = () => {
+    if (this.props.autoClear) {
+      this.setState({
+        value: '',
+      });
+    }
+
     this.props.confirm(this.state.value);
   }
 

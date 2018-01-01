@@ -3,7 +3,7 @@ import {OrderedMap} from 'immutable';
 
 import {createPeer, createSession} from 'snex';
 
-import Canvas from './Canvas';
+import PaintRoom from './PaintRoom';
 import GreenRoom from './GreenRoom';
 
 import {Player, GameState} from './state.js';
@@ -53,21 +53,55 @@ class Hub extends Component {
   }
 
   handleMessage(player, data) {
+    console.log('Incoming message', data, player);
+
     if (data.type === 'join') {
       const updatedPlayer = player
         .set('name', data.name)
         .set('ready', true);
 
-      this.updatePlayer(player.remote, updatedPlayer);
+      this.updatePlayer(updatedPlayer);
 
-      player.remote.send({
+      this.sendMessageTo(player, {
         type: 'ready',
       });
 
       if (!this.state.players.some(player => !player.ready)) {
-        const player = this.getNextPlayer();
-        this.activateDrawer(player);
+        this.nextPlayer();
       }
+    } else if (data.type === 'guess') {
+      this.handleGuess(player, data.guess);
+    }
+  }
+
+  handleGuess(playerGuessing, guess) {
+    const {gameState} = this.state;
+
+    const correct = guess === gameState.word;
+
+    if (correct) {
+      debugger;
+
+      const {scoreRate, playerDrawing} = gameState;
+
+      this.sendMessageTo(playerDrawing, {
+        type: 'correct-guess',
+        scoreRate,
+      });
+
+      this.sendMessageTo(playerGuessing, {
+        type: 'win',
+        guess,
+        scoreRate,
+      });
+
+      this.updatePlayer(playerGuessing
+        .set('score', playerGuessing.score + scoreRate));
+
+      this.updatePlayer(playerDrawing
+        .set('score', playerDrawing.score + scoreRate));
+
+      this.nextPlayer();
     }
   }
 
@@ -78,17 +112,39 @@ class Hub extends Component {
       this.handleMessage(player, data);
     });
 
-    this.updatePlayer(remote, player);
+    this.updatePlayer(player);
   }
 
-  updatePlayer(remote, player) {
-    const players = this.state.players.set(remote, player);
+  updatePlayer(player) {
+    const players = this.state.players.set(player.remote, player);
     this.setState({players});
+  }
+
+  nextPlayer() {
+    const player = this.getNextPlayer();
+    this.activateDrawer(player);
   }
 
   removePlayer(remote) {
     const players = this.state.players.delete(remote);
     this.setState({players});
+  }
+
+  sendMessageTo(player, message) {
+    console.log('Sending to', player, message);
+    player.remote.send(message);
+  }
+
+  sendMessageToAll(message) {
+    this.sendMessageToAllExcept(null, message);
+  }
+
+  sendMessageToAllExcept(exceptedPlayer, message) {
+    this.state.players.forEach(player => {
+      if (player !== exceptedPlayer) {
+        this.sendMessageTo(player, message);
+      }
+    });
   }
 
   getNextPlayer() {
@@ -101,23 +157,19 @@ class Hub extends Component {
 
   async activateDrawer(drawer) {
     const word = await getRandomWord();
-    this.state.players.forEach(player => {
-      if (player !== drawer) {
-        player.remote.send({
-          type: 'guessing',
-        });
-      } else {
-        player.remote.send({
-          type: 'drawing',
-          word,
-        });
-      }
 
-      console.log('Sending to', player);
+    this.sendMessageTo(drawer, {
+        type: 'drawing',
+        word,
+    });
+
+    this.sendMessageToAllExcept(drawer, {
+        type: 'guessing',
     });
 
     this.setState({
       gameState: this.state.gameState
+        .set('scoreRate', 100)
         .set('playerDrawing', drawer)
         .set('word', word)
     });
@@ -141,7 +193,7 @@ class Hub extends Component {
   renderGameState() {
     const {gameState, session, players} = this.state;
     if (gameState.playerDrawing) {
-      return <Canvas player={gameState.playerDrawing}/>;
+      return <PaintRoom drawer={gameState.playerDrawing} players={players.toList()} />;
     } else {
       return <GreenRoom
         session={session}

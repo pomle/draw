@@ -3,7 +3,7 @@ import {Record} from 'immutable';
 import {joinSession} from 'snex';
 
 import Join from './Join';
-import Assess from './Assess';
+import Guess from './Guess';
 import Draw from './Draw';
 import Wait from './Wait';
 
@@ -13,7 +13,7 @@ const PlayerState = Record({
   conn: null,
   ready: false,
   drawing: null,
-  assessing: null,
+  guessing: null,
 });
 
 class Play extends Component {
@@ -48,19 +48,24 @@ class Play extends Component {
   handleData(data) {
     if (data.type === 'drawing') {
       this.setState({
-        playerState: this.state.playerState.set('drawing', data.word)
+        playerState: this.state.playerState
+          .set('drawing', data.word)
+          .delete('guessing'),
       });
     }
 
-    if (data.type === 'assess') {
+    if (data.type === 'guessing') {
       this.setState({
-        playerState: this.state.playerState.set('assess', data.word)
+        playerState: this.state.playerState
+          .set('guessing', true)
+          .delete('drawing'),
       });
     }
 
     if (data.type === 'ready') {
       this.setState({
-        playerState: this.state.playerState.set('ready', true)
+        playerState: this.state.playerState
+          .set('ready', true)
       });
     }
 
@@ -86,8 +91,8 @@ class Play extends Component {
         return <Draw word={playerState.drawing} conn={playerState.conn}/>;
     }
 
-    if (playerState.assessing) {
-        return <Assess answer={playerState.assessing} conn={playerState.conn}/>;
+    if (playerState.guessing) {
+        return <Guess conn={playerState.conn}/>;
     }
 
     if (!playerState.ready) {
