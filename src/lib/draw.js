@@ -17,6 +17,18 @@ export function createDrawer(context, timeout = 200) {
     };
   }
 
+  function handleSignal(signal) {
+    if (signal === 'clear') {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    } else {
+      drawCoords(signal);
+    }
+  }
+
+  function drawCoords(coords) {
+    draw(toPos(coords));
+  }
+
   function draw(pos) {
     nextTime = new Date().getTime();
 
@@ -39,7 +51,5 @@ export function createDrawer(context, timeout = 200) {
     lastTime = nextTime;
   }
 
-  return function drawCoords(coords) {
-    draw(toPos(coords));
-  };
+  return handleSignal;
 }

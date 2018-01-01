@@ -22,8 +22,8 @@ class Canvas extends Component {
 
   handleData = (data) => {
     if (data.type === 'draw') {
-      this.drawHistory.push(data.draw.state);
-      this.draw(data.draw.state);
+      this.drawHistory.push(data.draw);
+      this.draw(data.draw);
     }
   }
 

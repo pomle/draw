@@ -29,13 +29,7 @@ class Draw extends Component {
       this.sensor = createSensor(this.surface);
 
       this.sensor.listen(data => {
-        this.draw(data.state);
-
-        console.log("Sending", data);
-        this.props.conn.send({
-          type: 'draw',
-          draw: data,
-        });
+        this.sendDrawSignal(data.state);
       });
     });
   }
@@ -46,8 +40,20 @@ class Draw extends Component {
       this.sensor.destroy();
   }
 
+  sendDrawSignal(signal) {
+    this.draw(signal);
+
+    const payload = {
+      type: 'draw',
+      draw: signal,
+    };
+
+    console.log('Sending', payload);
+
+    this.props.conn.send(payload);
+  }
+
   touch = () => {
-    console.log('touch');
     this.setState({
       isDrawing: true,
     });
@@ -60,9 +66,7 @@ class Draw extends Component {
   }
 
   clear = () => {
-    this.props.conn.send({
-      type: 'clear',
-    });
+    this.sendDrawSignal('clear');
   }
 
   render() {
@@ -76,7 +80,7 @@ class Draw extends Component {
     return (
       <div className="Draw">
         <div className="controls" style={hide}>
-          <button>Clear</button>
+          <button onClick={this.clear}>Clear</button>
         </div>
 
         <Fill aspect={800/450}>
