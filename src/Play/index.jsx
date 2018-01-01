@@ -23,6 +23,8 @@ class Play extends Component {
     this.state = {
       busy: true,
     };
+
+    this.sessionId = null;
   }
 
   componentDidMount() {
@@ -34,6 +36,12 @@ class Play extends Component {
   }
 
   async handleProps(props) {
+    if (this.sessionId === props.sessionId) {
+      return;
+    }
+
+    this.sessionId = props.sessionId;
+
     this.setState({
         busy: true,
         playerState: new PlayerState(),

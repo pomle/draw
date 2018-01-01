@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Push from 'components/Push';
 import StringDialog from 'components/StringDialog';
 import Hub from '../../Hub';
 
@@ -33,14 +34,14 @@ class Host extends Component {
   render() {
     const {sessionId} = this.state;
     if (sessionId) {
-      return <div>
+      this.next = <div>
         <Hub sessionId={sessionId} />
 
         <button onClick={this.restart}>Restart</button>
       </div>;
     }
 
-    return <div>
+    const first = <div>
       <StringDialog
         caption="Create Session"
         default={this.randomId}
@@ -49,6 +50,8 @@ class Host extends Component {
 
       <button onClick={this.props.cancel}>Back</button>
     </div>;
+
+    return <Push left={first} right={this.next} next={sessionId}/>;
   }
 }
 
