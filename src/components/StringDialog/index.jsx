@@ -25,7 +25,7 @@ class StringDialog extends Component {
         <h2>{this.props.caption}</h2>
 
         <div className="name">
-          <input type="text" autoFocus size="16" value={this.state.value} onChange={this.handleChange}/>
+          <input type="text" size="16" value={this.state.value} onChange={this.handleChange}/>
         </div>
 
         <div className="confirm">

@@ -1,9 +1,15 @@
 .Push {
-    position: absolute;
+
 }
 
-.Push > * {
-    position: absolute;
-    transition: transform 2s ease;
-    width: 100vw;
+.Push > .items {
+    display: flex;
+    transition: transform .5s ease;
+    height: 100%;
+    width: 200%;
+}
+
+.Push > .items > * {
+    height: 100%;
+    width: 100%;
 }

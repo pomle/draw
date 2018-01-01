@@ -4,16 +4,17 @@ import './Push.css';
 
 class Push extends Component {
   render() {
-    let x = this.props.next ? -1 : 0;
-    console.log('Show next', this.props.next, x);
+    const index = this.props.next ? -1 : 0;
 
     return (
       <div className="Push">
-        <div className="left" style={{transform: `translateX(${100 * x++}%)`}}>
-          {this.props.left}
-        </div>
-        <div className="right" style={{transform: `translateX(${100 * x++}%)`}}>
-          {this.props.right}
+        <div className="items" style={{transform: `translateX(${50 * index}%)`}}>
+          <div className="left">
+            {this.props.left}
+          </div>
+          <div className="right">
+            {this.props.right}
+          </div>
         </div>
       </div>
     );

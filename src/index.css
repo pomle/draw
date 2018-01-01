@@ -1,7 +1,6 @@
 html, body, #root, .App {
   height: 100%;
   touch-action: none;
-  overflow: hidden;
 }
 
 body {
