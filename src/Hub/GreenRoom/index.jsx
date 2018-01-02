@@ -12,7 +12,7 @@ class GreenRoom extends Component {
 
     return (
       <div className="GreenRoom">
-        <h2>Drawsy GreenRoom</h2>
+        <h2>Welcome to the Lobby</h2>
 
         { session
           ? <JoinURL session={session}/>
