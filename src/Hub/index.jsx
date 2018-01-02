@@ -1,31 +1,12 @@
 import React, { Component } from 'react';
 import {OrderedMap} from 'immutable';
 
-import {createPeer, createSession} from 'snex';
-
 import PaintRoom from './PaintRoom';
 import GreenRoom from './GreenRoom';
 
+import {startSession} from './connect';
 import {Player, GameState} from './state.js';
 import {getRandomWord} from './word.js';
-
-async function startSession(sessionId) {
-  if (!sessionId) {
-    const peer = createPeer();
-    return createSession(peer);
-  }
-
-  for (let count = 0;; count++) {
-    try {
-      const sessionAttempt = sessionId + (count > 0 ? count : '');
-      console.log('Trying session', sessionAttempt);
-      const peer = createPeer(sessionAttempt);
-      return await createSession(peer);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-}
 
 class Hub extends Component {
   constructor(props) {
