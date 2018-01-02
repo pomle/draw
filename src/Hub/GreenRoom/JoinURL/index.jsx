@@ -7,7 +7,8 @@ class JoinURL extends Component {
     return (
       <div className="JoinURL">
         <div>
-            Join the game at {session.id}
+            Join the game at
+            <div className="session-id">{session.id}</div>
         </div>
       </div>
     );

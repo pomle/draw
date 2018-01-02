@@ -28,3 +28,7 @@
     height: 5em;
     width: 5em;
 }
+
+.GreenRoom .session-id {
+    font-size: 3em;
+}
