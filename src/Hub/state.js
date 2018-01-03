@@ -38,7 +38,6 @@ export class Players extends Record({
   }
 
   update(player) {
-    console.log('Player name', player.name);
     return this.set('pool', this.pool.set(player.remote, player));
   }
 }
