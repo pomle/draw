@@ -5688,9 +5688,9 @@ slide@^1.1.5:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/slide/-/slide-1.1.6.tgz#56eb027d65b4d2dce6cb2e2d32c4d4afc9e1d707"
 
-snex@^0.5.0-0:
-  version "0.5.0-0"
-  resolved "https://registry.yarnpkg.com/snex/-/snex-0.5.0-0.tgz#e5253a2076986613cc784d55c857da750c3aee49"
+snex@0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/snex/-/snex-0.5.0.tgz#46ec8cb4285301a0d1abb448c6e460e958598a21"
 
 sntp@1.x.x:
   version "1.0.9"
