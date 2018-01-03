@@ -1,5 +1,5 @@
 import {Record, OrderedMap} from 'immutable';
-import {getRandomWord} from './word.js';
+import {getRandomWord, matching} from './word.js';
 
 export class Players extends Record({
     index: -1,
@@ -72,7 +72,7 @@ export class GameState extends Record({
     }
 
     async guess(guesser, word) {
-        if (word.toUpperCase() !== this.word.toUpperCase()) {
+        if (!matching(word, this.word)) {
             return this;
         }
 
