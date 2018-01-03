@@ -13,12 +13,12 @@ describe('Hub state', () => {
         state = new GameState();
     });
 
-    it('has no drawer until nextPlayer called', () => {
-        const player = new Player();
+    it('has no drawer until nextPlayer called', async () => {
+        const player = new Player({remote: createFakeRemote()});
         expect(state.players.current).toBe(undefined);
         state = state.setPlayer(player);
         expect(state.players.current).toBe(undefined);
-        state = state.nextPlayer();
+        state = await state.nextPlayer();
         expect(state.players.current).toBe(player);
     });
 
