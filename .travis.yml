@@ -3,6 +3,7 @@ node_js:
 - '9'
 
 script:
+- yarn test
 - yarn run build
 - echo "draw.pomle.com" > build/CNAME
 deploy:
