@@ -5,6 +5,8 @@ export async function startSession(sessionId) {
     const peer = createPeer();
     return createSession(peer);
   }
+  
+  sessionId = sessionId.toUpperCase();
 
   for (let count = 0;; count++) {
     try {
