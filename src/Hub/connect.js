@@ -6,7 +6,6 @@ export async function startSession(sessionId) {
     return createSession(peer);
   }
   
-  //FIX: force uppercase
   sessionId = sessionId.toUpperCase();
 
   for (let count = 0;; count++) {
