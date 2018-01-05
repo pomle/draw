@@ -9,6 +9,13 @@ class StringDialog extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    this.setState({
+      value: nextProps.value,
+    });
+  }
+
   handleChange = (event) => {
     this.setState({
       value: event.target.value,
